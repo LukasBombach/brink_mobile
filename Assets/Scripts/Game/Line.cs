@@ -15,7 +15,7 @@ public class Line : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(GOING_UP && this.transform.position.y >= -2){
+		if(GOING_UP && this.transform.position.y >= -3){
 			GOING_UP = false;
 		} 
 		if(!GOING_UP && this.transform.position.y <= -4.5){

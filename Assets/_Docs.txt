@@ -1,6 +1,12 @@
 Tag uses
+
 Layer uses (for collision, culling, and raycasting – essentially, what should be in what layer)
+
 GUI depths for layers (what should display over what)
+
+Important Comments
+	1. TAKEOUT - something that needs to be removed before release
+	2. TODO - Something that needs to be fixed or done better before release
 
 Project Setup
 	Google Ads
@@ -38,6 +44,9 @@ Scene setup
 
 
 Prefab structure of complicated prefabs
-Idiom preferences
+
+Syntax preferences
+	1. CAPS for constants
+
 Build setup
 Namespaces

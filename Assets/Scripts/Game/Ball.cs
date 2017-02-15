@@ -2,49 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: random speed spikes?
+
 public class Ball : MonoBehaviour {
 
-	public Vector2 DIRECTION;
+	public Vector2 _direction;
 	public float GAME_SCALE;
 	public GameObject LINE;
+	public GameMain _camera_script;
 
 	void Start () {
-		GAME_SCALE = 20000;
-		LINE = Camera.main.GetComponent<GameMain> ().LINE;
+		_camera_script = Camera.main.GetComponent<GameMain>();
+		GAME_SCALE = 15000;
+		LINE = _camera_script.LINE;
 		SetRandomDirection ();
 	}
 	
 	void Update () {
-		// for testing
+		// for testing TAKEOUT
 		if(Input.GetKeyDown(KeyCode.Space)){
 			OnTouchDown (this.transform.position);
+		}
+		//check if player has lost
+		if(transform.position.y <= -5){
+			_camera_script.GameOver ();
+			Destroy (gameObject);
 		}
 	}
 
 	void OnTouchDown(Vector2 objectPoint){
 //		print (this.GetComponent<Rigidbody>().velocity.magnitude);
-		Camera.main.GetComponent<GameMain>().STATS_VOLLEYS++;
+		_camera_script._stats_volleys++;
+
 		// check if they hit the line
 		float accuracy = (LINE.transform.position - this.transform.position).magnitude;
 		if (accuracy < 0.8) {
-			Camera.main.GetComponent<GameMain> ().MULTIPLIER++;
-			Camera.main.GetComponent<GameMain> ().STATS_PERFECTS++; 
+			_camera_script._multiplier++;
+			_camera_script._stats_perfects++; 
 		} else {
-			if(Camera.main.GetComponent<GameMain> ().MULTIPLIER > Camera.main.GetComponent<GameMain> ().STATS_MULTIPLIER){
-				Camera.main.GetComponent<GameMain> ().STATS_MULTIPLIER = Camera.main.GetComponent<GameMain> ().MULTIPLIER;
+			if(_camera_script._multiplier > _camera_script._stats_multiplier){
+				_camera_script._stats_multiplier = _camera_script._multiplier;
 			} 
-			Camera.main.GetComponent<GameMain> ().MULTIPLIER = 1;
+			_camera_script._multiplier = 1;
 		}
 
 		// add score
-		Camera.main.GetComponent<GameMain>().SCORE += 
-			(Camera.main.GetComponent<GameMain>().LEVEL * Camera.main.GetComponent<GameMain> ().MULTIPLIER);
+		_camera_script._score += 
+			(_camera_script._level * _camera_script._multiplier);
 		
 		// add new force to ball
 		RemoveForce ();
 		SetRandomDirection ();
 		ScaleByLevel ();
-		this.GetComponent<Rigidbody> ().AddForce (DIRECTION * Time.deltaTime * GAME_SCALE);
+		this.GetComponent<Rigidbody> ().AddForce (_direction * Time.deltaTime * GAME_SCALE);
 	}
 
 	// random normalized vector with more y than x
@@ -54,8 +64,8 @@ public class Ball : MonoBehaviour {
 		int[] arr = new int[] { -1, 1 };
 		float ry = (float)Random.Range (50.0f, 100.0f);
 
-		DIRECTION = new Vector2 ((rx * arr[dir - 1]), ry);
-		DIRECTION = DIRECTION.normalized;
+		_direction = new Vector2 ((rx * arr[dir - 1]), ry);
+		_direction = _direction.normalized;
 	}
 
 	void RemoveForce(){
@@ -64,7 +74,7 @@ public class Ball : MonoBehaviour {
 	}
 
 	void ScaleByLevel(){
-		float tmp = 1 + (Camera.main.GetComponent<GameMain>().LEVEL/10);
+		float tmp = 1 + (_camera_script._level/10);
 		GAME_SCALE = 20000 * tmp;
 	}
 

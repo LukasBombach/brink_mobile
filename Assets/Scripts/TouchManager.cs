@@ -46,7 +46,7 @@ public class TouchManager : MonoBehaviour {
 					GameObject recipient = hit.transform.gameObject;
 
 					if (touch.phase == TouchPhase.Began) {
-						recipient.SendMessage ("OnTouchDown", hit.point);
+						recipient.SendMessage ("OnTouchDown", new Vector2(hit.point.x, hit.point.y));
 					}
 					if (touch.phase == TouchPhase.Ended) {
 						recipient.SendMessage ("OnTouchUp", hit.point);
