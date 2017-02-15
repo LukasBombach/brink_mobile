@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: c66a0a3e5c3524be0a9160ba747a4a7b
+timeCreated: 1487114435
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Fakt Soft Pro
+  fontNames:
+  - Fakt Soft Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8d3fe080aadd64ce5b04054a33eceeec, type: 3}
+  - {fileID: 12800000, guid: 2b1a156ce75d54d34bb81b5b302f2e73, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
